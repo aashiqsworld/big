@@ -5,12 +5,319 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
   <title>Big</title>
   <link href="big.css" rel="stylesheet" type="text/css" />
+  <link href="themes/dark.css" rel="stylesheet" type="text/css" />
   <script src="big.js"></script>
 </head>
-<body class="light">
-  <div>
-    Your presentation goes here
+<body class="dark">
+
+  <!-- title -->
+  <div class='layout' style='grid-template-rows:60% 40%;'>
+    <h1>Interactive Augmented Reality Storytelling Guided by Scene Semantics</h1>
+    <small class="nowrap fade">
+      Changyang Li, George Mason University <br>
+      Wanwan Li, George Mason University and University of South Florida, USA <br>
+      Haikun Huang, George Mason University, USA <br>
+      Lap-Fai Yu, George Mason University, USA <br>
+    </small>
     <notes>Speakers notes go here.</notes>
   </div>
+
+<!-- background -->
+  <div class='layout' style='grid-template-rows:20% 60%;'>
+    <div class='fade'>background</div>
+    <div>
+      • AR enhances real world experiences with virtual content <br>
+      • growing trend is to leverage scene semantics and user behavior to elevate AR experiences
+    </div>
+  </div>
+
+<!-- problem -->
+  <div>
+    <h3 class="nowrap" style="text-align: center;">
+      How do we tell novel interactive AR stories <br>
+      involving virtual agents objects, and events <br> 
+      in real scenes while utilizing scene layouts <br>
+      and user semantics?
+    </h3>
+  </div>
+
+
+  <!-- challenges -->
+  <div class='layout' style='grid-template-rows:20% 60%;'>
+    <div class='fade'>challenges</div>
+    <div>
+      (1) How to position and pose the virtual contents  <br>
+      (2) How to choose an optimal solution to accommodate the story event contexts <br>
+      (3) How to ensure the temporal coherence between the events of a story <br>
+      (4) How to adapt the same story to different real-world environments
+
+      <notes>
+        (1) How to position and pose the virtual contents. A specific difficulty with AR storytelling is that multiple virtual characters or objects might interact with each other, thus their positions and poses should be considered jointly
+        
+        (2) How to choose an optimal solution to accommodate the story event contexts. For example, between multiple chairs in a scene, which chair should a virtual character choose in an event? 
+
+        (3) How to ensure the temporal coherence between the events of a story. Since a story happens chronologically, how to instantiate a story in a scene should not only consider spatial relations at a certain event, but also temporal relations between events at different time frames 
+
+        (4) How to adapt the same story to different real-world environments.
+      </notes>
+    </div>
+  </div>
+
+
+<!-- contributions -->
+  <div class='layout' style='grid-template-rows:20% 60%;'>
+    <div class='fade'>contributions</div>
+    <div>
+      (1) novel problem of interactive AR storytelling involving virtual characters, items, and events, considering scene layouts and semantics <br>
+      (2) heirarchical story sampling approach that adapts story events to the player's dynamic behaviors in a real environment <br>
+      (3) validation of approach through AR experiments and a user study
+    </div>
+
+    <notes>
+      • We propose novel problem of interactive AR storytelling involving virtual characters, items, and events to take place in different real scenes, considering scene layouts and semantics.
+
+      • We propose a hierarchical story sampling approach that adapts story events to the player's dynamic behaviors in a real environment. By sampling spatial candidates followed by story assemblies with temporal considerations, our approach supports interactive update of the story at runtime, enabling the player to participate as a character in AR storytelling.
+
+      • We validate the effectiveness of our approach by conducting AR experiments and a user study in real scenes.
+    </notes>
+  </div>
+
+
+  <!-- overview -->
+  <div class='layout' style='grid-template-rows:20% 50% 30%;'>
+    <div class='fade'>overview</div>
+    <div>
+      takes an abstract story description & target scene as inputs, and animates a story according to player's interaction with the scene and virtual characters
+    </div>
+    <div class="nowrap"> 
+      preprocessing → interactive storytelling
+    </div>
+    <notes>
+      [read top text]
+
+      There are two stages: the preprocessing and the interactive storytelling
+    </notes>
+  </div>
+
+
+  
+  <!-- overview-img 1-->
+  <div>
+    <img src="images/overview.png"/>
+
+    <notes>
+      An overview of the approach. In the preprocessing phase, scene semantics are extracted in a semi-automatic manner, and meanwhile a story graph is extracted from an input story script. A spatial candidates sampling process prepares a set of candidate AR content poses within each event locally. In the interactive storytelling process, the AR player keeps interacting with the AR contents at each event, and such interactions are passed as an input to the story assembly module for picking optimal spatial candidates for the following events adaptive to the player's actions.
+    </notes>
+  </div>
+
+   <!-- overview-img 2-->
+   <div>
+    <img src="images/kitchen.jpeg"/>
+
+    <notes>
+      The approach automatically poses AR contents based on scene semantics. This example shows an event in a kitchen with a human player participating as a character in the story, interacting with virtual characters.
+    </notes>
+  </div>
+
+  <!-- raw story scripts -->
+  <div>
+  <div class='fade'>raw story scripts</div>
+  <br>
+  <div class="nowrap">
+    <code>b = (character, activity, room)</code>
+  </div>
+  <div>
+    ↳ tuple describing state of character in event
+  </div>
+    <br>
+  <div>
+     <code>E = {e<sub>k</sub>}<sub>k=1,2,...,T</sub></code> <br>
+     ↳ a raw story <code>E</code> is a set of all event frames (<code>T</code>)
+  </div>
+    <br>
+  <div>
+    <code>e<sub>k</sub> = {b<sub>c</sub>}</code> <br>
+    ↳ event frame is a set containing the state <code>b<sub>c</sub></code>of each character <code>c</code>
+  </div>
+
+  <notes> 
+    
+
+  </notes>
+</div>
+
+
+  <!-- storygraph-img -->
+  <div>
+    <img src="images/story-graph.jpeg"/>
+
+    <notes>
+      A story graph representation. A story graph consists of a sequence of event graphs. Each event graph Ge is rooted at its corresponding event node e. Each event graph comprises multiple spatial graphs. Each spatial graph SG, rooted at a nodes, contains the high-level spatial relations between the virtual characters C, virtual items I, and the furniture objects F in a room r € R. Instantiating a spatial graph with position and orientation attributes of the characters and items generates a spatial candidate. The two scenes on the right show the virtual characters and objects set using two spatial candidates of the spatial graphs rooted at si and s2, respectively. Instantiating an event refers to selecting a spatial graph and generating a spatial candidate of this spatial graph.
+    </notes>
+  </div>
+
+
+  <!-- heirarchical story sampling -->
+  <div>
+    <div class='fade'>heirarchical story sampling</div>
+    <br> <br>
+    <div>
+      (1) <em>spatial candidates sampling</em>: considers spatial constraints within each spatial graph SG for generating spatial candidates <br><br>
+      (2) <em>story assembly</em>: uses the generated spatial candidates to assemble a story solution considering temporal constraints and dynamic player actions.
+    </div>
+      
+  
+    <notes> 
+      Since a story is described in the tangled spatial and temporal domains, the overall search space can be large and sparse. It can be difficult to sample a story solution efficiently by directly modeling the whole story as a single configuration, especially when there multiple events that contain long temporal constraints, and when there are multiple virtual characters participating in a single event with complicated spatial constraints.
+  
+    </notes>
+  </div>
+
+  <!-- spatial candidate sampling -->
+  <div>
+    <div class='fade'>spatial candidate sampling</div>
+    <br>
+    <div>
+      cost function parameters: <br>
+      • individual activity <br>
+      • group activity <br>
+      • character pose <br> 
+      • item placement <br>
+    </div>
+      
+  
+    <notes> 
+      The authors devised a cost function to evaluate whether virtual characters and items are reasonably placed and posed in an event. The parameters considered are the following: 
+  
+    </notes>
+  </div>
+
+
+  <!-- spatial candidate sampling-img 1-->
+  <div>
+  <img src="images/scs1.jpeg"/>
+
+  <notes>
+    Example group activity results in a chat event. In each case, the yellow points and dashed lines form the group convex hull. The yellow region and red vector indicate the field of view and head forward direction of the upper-right character.
+  </notes>
+</div>
+
+  <!-- spatial candidate sampling-img 1-->
+  <div>
+    <img src="images/scs2.jpeg"/>
+  
+    <notes>
+      Placing items on a rectangular or a round surface
+    </notes>
+  </div>
+  
+
+
+
+
+<!-- story assembly -->
+<div>
+  <div class='fade'>story assembly</div>
+  <br>
+  <div>
+    using sampled spatial candidates, the <em>story assembly stage</em> dynamically assembles a story during the AR runtime to fit with player behaviors
+  </div>
+    
+
+  <notes> 
+    Using the sampled spatial candidates for the spatial graphs, the story assembly stage dynamically assembles a story during the AR runtime to fit with the player’s behaviors and the environment
+  </notes>
+</div>
+
+
+<!-- story-assembly-img -->
+<div>
+  <img src="images/sa.png"/>
+
+  <notes>
+    During story assembly, for each event 𝑒, an event instantiation is selected, which comprises a selected spatial graph (rooted at a node 𝑠) together with its instantiation (i.e. a spatial candidate 𝛾 ). Red colors refer to the selected spatial graphs and spatial candidates of an assembled story.
+
+  </notes>
+</div>
+
+
+<!-- dynamic-story-assembly-img -->
+<div>
+  <img src="images/dynamic-story-assembly.png"/>
+
+  <notes>
+    An illustration of dynamic story assembly at event frame 𝑒𝑡 . Event instantiations (𝑒ˆ𝑡𝑎 ) are precomputed for all possible player actions 𝑎 ∈ 𝐴 in this event and saved in the buffer Ω𝑡 , and one is picked for animation based on the estimated action 𝑎ˆ at runtime. Red color denotes the estimated action and selected event instantiation.
+
+  </notes>
+</div>
+
+
+
+<!-- events-img -->
+<div class='layout' style='grid-template-rows:0% 100%;'>
+  <div></div>
+  <img src="images/events.jpeg"/>
+
+
+  <notes>
+    Descriptions of the selected events of the four stories in different indoor scenes. [P] denotes the AR player; [m] denotes the manager; [prof] denotes the professor; and others are general characters without specific roles.
+
+  </notes>
+</div>
+
+
+
+<!-- user study -->
+<div>
+  <div class='fade'>user study</div>
+  <br>
+  <div>
+    • hololens 2 <br>
+    • 30 participants <br>
+    • <em> apartment, office, classroom, and makerspace</em> scenes <br>
+    • manually designed experience vs. author's framework
+
+  
+
+  </div>
+    
+
+  <notes> 
+
+  </notes>
+</div>
+
+
+<!-- story-assembly-img -->
+<div>
+  <img src="images/stats.png"/>
+
+  <notes>
+    Quantitative results of participants’ ratings on the plausibility of individual activity (individual ACT.), group activity (group ACT.) and item placement (item), including the average (avg.), standard deviation (std.) and 𝑝 value. 𝐼𝑜, 𝐼𝐼𝑜 and 𝐼𝐼𝐼𝑜 were synthesized by our approach. 𝐼𝑚, 𝐼𝐼𝑚 and 𝐼𝐼𝐼𝑚 were created by designers
+
+
+  </notes>
+</div>
+
+
+<!-- user study -->
+<div>
+  <div class='fade'>summary</div>
+  <br>
+  <div>
+    • authors present a novel <em>interactive AR storytelling</em> approach guided by <em>indoor scene semantics</em> and <em>user interaction</em> <br><br>
+
+    • user study validates effectiveness of the approach for AR storytelling in different environments <br>
+
+  
+
+  </div>
+    
+
+  <notes> 
+
+  </notes>
+</div>
+
 </body>
 </html>

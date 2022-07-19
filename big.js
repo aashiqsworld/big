@@ -20,6 +20,15 @@ addEventListener("load", () => {
     slide.classList.add("slide");
     let sc = pc.appendChild(ce("div", "slide-container"));
     sc.appendChild(slide);
+    const newDiv = document.createElement("div");
+    const num = document.createTextNode((_i+1).toString());
+    newDiv.style.position = "absolute";
+    newDiv.style.bottom = "5%";
+    newDiv.style.right = "5%";
+    newDiv.style.fontSize = "200%";
+    newDiv.style.color = "#717984";
+    newDiv.appendChild(num);
+    sc.appendChild(newDiv)
     return Object.assign(sc, {
       _notes: Array.from(slide.querySelectorAll("notes"), noteElement => {
         noteElement.parentNode.removeChild(noteElement);
@@ -52,6 +61,7 @@ addEventListener("load", () => {
   }
 
   function go(n, force) {
+    // console.clear();
     n = Math.max(0, Math.min(big.length - 1, n));
     if (!force && big.current === n) return;
     big.current = n;
@@ -69,7 +79,8 @@ addEventListener("load", () => {
     if (slideDiv.dataset.timeToNext) timeoutInterval = window.setTimeout(forward, parseFloat(slideDiv.dataset.timeToNext) * 1000);
     onResize();
     if (window.location.hash !== n) window.location.hash = n;
-    document.title = slideDiv.textContent;
+    document.title = "slide " + big.current;
+    
   }
 
   function resizeTo(sc, width, height) {

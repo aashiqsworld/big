@@ -15,3 +15,11 @@ a {
 a:hover {
   background: #4e5b6f;
 }
+
+.fade {
+  color: #717984;
+}
+
+code {
+  color: #fadb03;
+}

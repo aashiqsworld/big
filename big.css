@@ -4,14 +4,18 @@ html {
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   margin: 0;
   padding: 0;
 }
 
 h1,
 h2,
-h3,
+h3 {
+  margin: 0;
+  font-weight: 700;
+}
+
 p {
   margin: 0;
 }
@@ -54,6 +58,10 @@ body.talk-mode {
   align-items: center;
   justify-content: center;
   height: 100%;
+  padding-top: 10%;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 10%;
 }
 
 body.print-mode {
